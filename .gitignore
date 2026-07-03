@@ -1,0 +1,18 @@
+# Dataset volumineux (401 Mo) - a re-telecharger depuis Kaggle plutot que de versionner
+# https://www.kaggle.com/datasets/fronkongames/steam-games-dataset
+games.csv
+
+# Fichiers generes / sorties de scripts (reproductibles en relancant les scripts)
+*_out.txt
+sample_corrected_20.csv
+ui_screenshots/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Outils locaux
+.claude/
