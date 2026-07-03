@@ -10,12 +10,30 @@ résultats des requêtes), voir **[RAPPORT_PROJET.pdf](RAPPORT_PROJET.pdf)**.
 
 - Python 3.11+
 - MongoDB installé et lancé localement (`mongodb://localhost:27017`)
-- `games.csv` present a la racine du projet (dataset Kaggle, non versionne dans git — voir `.gitignore`)
+- `games.csv` téléchargé depuis Kaggle et placé à la racine du projet, à côté de
+  `populate_db.py` (non versionné dans git — voir `.gitignore`)
 
 ## Installation
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Configuration (optionnelle)
+
+Par défaut, les scripts se connectent à `mongodb://localhost:27017` et lisent
+`games.csv` à côté du script. Pour utiliser une autre base (ex: MongoDB Atlas) ou
+un CSV situé ailleurs, définir ces variables d'environnement avant de lancer les
+scripts :
+
+```bash
+# Windows (PowerShell)
+$env:MONGO_URI = "mongodb://autre-hote:27017"
+$env:GAMES_CSV_PATH = "C:\chemin\vers\games.csv"
+
+# Linux / macOS
+export MONGO_URI="mongodb://autre-hote:27017"
+export GAMES_CSV_PATH="/chemin/vers/games.csv"
 ```
 
 ## Lancer le projet

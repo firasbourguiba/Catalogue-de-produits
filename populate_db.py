@@ -19,10 +19,12 @@ Notes sur le CSV source :
   best-effort, pas parfaite a 100%, mais elimine l'essentiel du bruit observe.
 """
 import ast
+import os
 import re
 import sys
 import io
 from datetime import datetime, timezone
+from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="backslashreplace")
 
@@ -31,8 +33,12 @@ import numpy as np
 from pymongo import MongoClient, ASCENDING
 from pymongo.errors import BulkWriteError
 
-CSV_PATH = r"c:\Users\firas\Documents\nosql projet\games.csv"
-MONGO_URI = "mongodb://localhost:27017"
+# Chemin relatif au script : games.csv doit etre place a cote de ce fichier.
+# Surchargeable via la variable d'environnement GAMES_CSV_PATH si le CSV est ailleurs.
+CSV_PATH = os.environ.get("GAMES_CSV_PATH", str(Path(__file__).resolve().parent / "games.csv"))
+# URI MongoDB, surchargeable via la variable d'environnement MONGO_URI (utile si la base
+# ne tourne pas en local par defaut, ex: MongoDB Atlas ou un autre hote).
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME = "steam_catalog"
 
 FIXED_COLUMNS = [

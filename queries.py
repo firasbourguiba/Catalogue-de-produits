@@ -4,10 +4,13 @@ factorisees en fonctions reutilisables par l'API (voir business_queries.py
 pour la version originale qui a servi a valider chaque requete avec de
 vrais resultats).
 """
-from pymongo import MongoClient
-from pymongo.mongo_client import MongoClient as MongoClientType
+import os
 
-MONGO_URI = "mongodb://localhost:27017"
+from pymongo import MongoClient
+
+# Surchargeable via la variable d'environnement MONGO_URI (utile si la base
+# ne tourne pas en local par defaut, ex: MongoDB Atlas ou un autre hote).
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME = "steam_catalog"
 
 _client = MongoClient(MONGO_URI)

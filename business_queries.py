@@ -2,6 +2,7 @@
 13 besoins utilisateurs (questions metier) et leurs requetes d'agregation MongoDB
 associees, executees reellement sur la base 'steam_catalog' peuplee par populate_db.py.
 """
+import os
 import sys
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="backslashreplace")
@@ -10,7 +11,10 @@ import json
 from bson import ObjectId
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://localhost:27017")
+# Surchargeable via la variable d'environnement MONGO_URI (utile si la base
+# ne tourne pas en local par defaut, ex: MongoDB Atlas ou un autre hote).
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
+client = MongoClient(MONGO_URI)
 db = client["steam_catalog"]
 
 
